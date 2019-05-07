@@ -2,10 +2,10 @@
 
 import axios from 'axios'
 export default {
-  login({ commit }, user) {
+  login({ commit }, admin) {
     return new Promise((resolve, reject) => {
       commit('auth_request')
-      axios({ url: process.env.VUE_APP_BASE_URL+'/users/login-admin', data: user, method: 'POST' })
+      axios({ url: process.env.VUE_APP_BASE_URL+'/users/login-admin', data: admin, method: 'POST' })
         .then(res => {
 
         if (res.data.result !== 'Success'){
@@ -13,14 +13,14 @@ export default {
         }
         else{
             const token = res.data.token
-            const user = res.data.user
-            user.token = token
+            const admin = res.data.admin
+            admin.token = token
             localStorage.setItem('token', token)
-            localStorage.setItem('email', user.email)
-            localStorage.setItem('userid', user._id)
+            localStorage.setItem('email', admin.email)
+            localStorage.setItem('userid', admin._id)
             // Add the following line:
             axios.defaults.headers.common['Authorization'] = token
-            commit('auth_success', user)
+            commit('auth_success', admin)
             resolve(res)
         }
         })

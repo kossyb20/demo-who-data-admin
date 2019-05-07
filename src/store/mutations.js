@@ -4,10 +4,10 @@ export default {
   auth_request(state) {
     state.status = 'loading'
   },
-  auth_success(state, user) {
+  auth_success(state, admin) {
     state.status = 'success'
-    state.token = user.token
-    state.user = user
+    state.token = admin.token
+    state.admin = admin
   },
   auth_error(state) {
     state.status = 'error'

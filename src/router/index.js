@@ -11,6 +11,7 @@ import Vue from 'vue'
 import VueAnalytics from 'vue-analytics'
 import Router from 'vue-router'
 import Meta from 'vue-meta'
+import store from '../store/index'
 
 // Routes
 import paths from './paths'
@@ -60,12 +61,12 @@ if (process.env.GOOGLE_ANALYTICS) {
 }
 
 router.beforeEach((to, from, next) => {
-  if (to.matched.some(record => record.meta.requiresAuth)) {
+  if (to.path !== '/login') {
     if (store.getters.isLoggedIn) {
       next()
       return
     } else {
-      next('/user-profile')
+      next('/login')
     }
    
   } else {

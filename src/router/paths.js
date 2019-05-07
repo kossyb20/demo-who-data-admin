@@ -33,6 +33,14 @@ export default [
       requiresAuth: true
     }
   },
+  {
+    path: '/login',
+    name: 'Login',
+    view: 'Login',
+    meta: {
+      requiresAuth: true
+    }
+  },
   // {
   //   path: '/typography',
   //   view: 'Typography'

@@ -57,6 +57,7 @@
             v-text="link.text"
           />
         </v-list-tile>
+        <v-btn v-if="isLoggedIn" @click="logout" color="warning">Logout</v-btn>
       </v-layout>
     </v-img>
   </v-navigation-drawer>
@@ -93,7 +94,6 @@ export default {
         icon: 'mdi-clipboard-outline',
         text: 'Entries'
       },
-
       // {
       //   to: '/icons',
       //   icon: 'mdi-chart-bubble',
@@ -124,6 +124,9 @@ export default {
     },
     items () {
       return this.$t('Layout.View.items')
+    },
+    isLoggedIn: function() {
+      return this.$store.getters.isLoggedIn;
     }
   },
   mounted () {
@@ -141,7 +144,12 @@ export default {
       } else {
         this.responsive = false
       }
-    }
+    },
+    logout: function() {
+      this.$store.dispatch("logout").then(() => {
+        this.$router.push("/login");
+      });
+    },
   }
 }
 </script>

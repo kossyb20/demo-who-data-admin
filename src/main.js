@@ -50,9 +50,11 @@ Vue.mixin({
         getCenters: process.env.VUE_APP_BASE_URL + '/api/get-centers',
         register: process.env.VUE_APP_BASE_URL + '/users/register',
         login: process.env.VUE_APP_BASE_URL + '/users/login-admin',
+        registerAdmin: process.env.VUE_APP_BASE_URL + '/users/register-admin',
         getCenterEntries: process.env.VUE_APP_BASE_URL + '/api/get-center-entries',
         getDateFilteredEntries: process.env.VUE_APP_BASE_URL + '/api/get-entries-by-date',
-        getDateRangeFilteredEntries: process.env.VUE_APP_BASE_URL + '/api/get-entries-by-daterange'
+        getDateRangeFilteredEntries: process.env.VUE_APP_BASE_URL + '/api/get-entries-by-daterange',
+        
       }
     }
   }

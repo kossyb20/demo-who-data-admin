@@ -17,16 +17,22 @@
           text=""
         >
             <v-form v-on:submit.prevent action="" v-on:keyup.enter="doNothing">
-                <v-switch v-model="formData.isAdmin" label="Is Admin"></v-switch>
-                <template v-if="formData.isAdmin == false">
-                <v-text-field v-model="formData.name" label="Name "  ></v-text-field>
-                <v-text-field v-model="formData.phone" label="Phone Number" type="number"  ></v-text-field>
-                <v-text-field v-model="formData.role" label="Role"  ></v-text-field>
-                <v-select :items="centers" v-model="formData.careCenter" box label="Center"></v-select>
+                <v-switch v-model="user.isAdmin" label="Is Admin"></v-switch>
+                
+                <v-text-field v-model="user.name" label="Name "  ></v-text-field>
+                <template v-if="user.isAdmin == false">
+                <v-text-field v-model="user.phone" label="Phone Number" type="number"  ></v-text-field>
+                <v-select :items="centers" v-model="user.careCenter" box label="Center"></v-select>
+                <v-text-field v-model="user.role" label="Role"  ></v-text-field>
                 </template>
-                <v-text-field v-else v-model="formData.email" label="Email" type="email"  ></v-text-field>
-                <v-text-field required v-model="formData.password" label="Password"  type="password"></v-text-field>
-                <v-text-field required v-model="formData.password2" label="Repeat Password"  type="password"></v-text-field>
+                <template v-else>
+                <v-text-field v-model="user.email" label="Email" type="email"  ></v-text-field>
+                <v-text-field v-model="user.phone" label="Phone Number" type="number"  ></v-text-field>
+                <v-select :items="orgs" v-model="user.organisation" box label="Organisation"></v-select>
+                <v-text-field v-model="user.role" label="Role"  ></v-text-field>
+                </template>
+                <v-text-field required v-model="user.password" label="Password"  type="password"></v-text-field>
+                <v-text-field required v-model="user.password2" label="Repeat Password"  type="password"></v-text-field>
                 
                 <v-btn @click="submitData" color="blue">Register</v-btn>
 
@@ -42,27 +48,31 @@
           title="Profile Preview"
           text="">
           <v-card-text class="text-xs-center">
-            <template v-if="formData.isAdmin == false">
-            <h4 class="card-title font-weight-light"><span class="font-weight-bold">Name: </span>{{formData.name}}</h4>
-            <h4 class="card-title font-weight-light"><span class="font-weight-bold">Phone Number: </span>{{formData.phone}}</h4>
-            <h4 class="card-title font-weight-light"><span class="font-weight-bold">Role: </span>{{formData.role}}</h4>
-            <h4 class="card-title font-weight-light"><span class="font-weight-bold">Facility: </span>{{formData.careCenter}}</h4>
-            <h4 class="card-title font-weight-light"><span class="font-weight-bold">Password: </span>{{formData.password}}</h4>
-            <h4 class="card-title font-weight-light"><span class="font-weight-bold">Password Repeat: </span>{{formData.password2}}</h4>
-            <h4 class="card-title font-weight-light"><span class="font-weight-bold">Is Admin: </span>{{formData.isAdmin}}</h4>
+            <template v-if="user.isAdmin == false">
+            <h4 class="card-title font-weight-light"><span class="font-weight-bold">Name: </span>{{user.name}}</h4>
+            <h4 class="card-title font-weight-light"><span class="font-weight-bold">Phone Number: </span>{{user.phone}}</h4>
+            <h4 class="card-title font-weight-light"><span class="font-weight-bold">Role: </span>{{user.role}}</h4>
+            <h4 class="card-title font-weight-light"><span class="font-weight-bold">Facility: </span>{{user.careCenter}}</h4>
+            <h4 class="card-title font-weight-light"><span class="font-weight-bold">Password: </span>{{user.password}}</h4>
+            <h4 class="card-title font-weight-light"><span class="font-weight-bold">Password Repeat: </span>{{user.password2}}</h4>
+            <h4 class="card-title font-weight-light"><span class="font-weight-bold">Is Admin: </span>{{user.isAdmin}}</h4>
             </template>
             <template v-else>
-              <h4 class="card-title font-weight-light"><span class="font-weight-bold">Email: </span>{{formData.email}}</h4>
-              <h4 class="card-title font-weight-light"><span class="font-weight-bold">Password: </span>{{formData.password}}</h4>
-              <h4 class="card-title font-weight-light"><span class="font-weight-bold">Password Repeat: </span>{{formData.password2}}</h4>
-              <h4 class="card-title font-weight-light"><span class="font-weight-bold">Is Admin: </span>{{formData.isAdmin}}</h4>
+              <h4 class="card-title font-weight-light"><span class="font-weight-bold">Name: </span>{{user.name}}</h4>
+              <h4 class="card-title font-weight-light"><span class="font-weight-bold">Email: </span>{{user.email}}</h4>
+              <h4 class="card-title font-weight-light"><span class="font-weight-bold">Phone Number: </span>{{user.phone}}</h4>
+              <h4 class="card-title font-weight-light"><span class="font-weight-bold">Organisation: </span>{{user.organisation}}</h4>
+              <h4 class="card-title font-weight-light"><span class="font-weight-bold">Role: </span>{{user.role}}</h4>
+              <h4 class="card-title font-weight-light"><span class="font-weight-bold">Password: </span>{{user.password}}</h4>
+              <h4 class="card-title font-weight-light"><span class="font-weight-bold">Password Repeat: </span>{{user.password2}}</h4>
+              <h4 class="card-title font-weight-light"><span class="font-weight-bold">Is Admin: </span>{{user.isAdmin}}</h4>
             </template>
             
 
           </v-card-text>
         </material-card>
       </v-flex>
-      <v-flex
+      <!-- <v-flex
         xs12
         md8
       >
@@ -81,7 +91,7 @@
             </v-form>
         </material-card>
         </template>
-      </v-flex>
+      </v-flex> -->
     </v-layout>
   </v-container>
 </template>
@@ -96,6 +106,7 @@ function initialState() {
                 phone: '',
                 role: '',
                 careCenter: '',
+                organisation: '',
                 password: '',
                 password2: '',
                 isAdmin: false,
@@ -109,8 +120,9 @@ function initialState() {
 export default {
     name: 'Register',
     data() {
-        return {formData : initialState(),
+        return {user : initialState(),
         centers: [],
+        orgs: ['WHO', 'GOVERNMENT', 'HELIUM HEALTH'],
         email: '',
         password: ''}
 
@@ -120,27 +132,48 @@ export default {
 
         submitData() {
 
-            if (this.formData.password === this.formData.password2) {
+            if (this.user.password === this.user.password2) {
 
-                this.formData.careCenter = this.formData.careCenter
+                //this.user.careCenter = this.user.careCenter
+                if (this.user.isAdmin === false){
 
-                axios.post(this.urls.register, this.formData)
-                .then(res => {
+                  axios.post(this.urls.register, this.user)
+                  .then(res => {
 
-                if (res.data.result === 'User Created'){
-                    this.$alertify.success('SUCCESSFULLY CREATED USER. NOW LOGIN.')
-                    this.$router.push('login')
+                  if (res.data.result === 'User Created'){
+                      this.$alertify.success('SUCCESSFULLY CREATED USER')
+                      
+                  }
+                  else{
+                      this.$alertify.error('UNABLE TO CREATE USER')
+                  }
+
+
+                  })
+                  .catch(err => this.$alertify.error('FAILED: ' + err));
+                  
+                  
+                  this.user = initialState()
                 }
                 else{
-                    this.$alertify.error('UNABLE TO CREATE USER')
+                    axios.post(this.urls.registerAdmin, this.user)
+                    .then(res => {
+
+                    if (res.data.result === 'Admin Created'){
+                        this.$alertify.success('SUCCESSFULLY CREATED ADMIN')
+                        
+                    }
+                    else{
+                        this.$alertify.error('UNABLE TO CREATE ADMIN')
+                    }
+
+
+                    })
+                    .catch(err => this.$alertify.error('FAILED: ' + err));
+                    
+                    
+                    this.user = initialState()
                 }
-
-
-                })
-                .catch(err => this.$alertify.error('FAILED: ' + err));
-                
-                
-                this.formData = initialState()
 
             }
             else{
@@ -150,21 +183,21 @@ export default {
             
         },
 
-        login: function() {
-            let email = this.email;
-            let password = this.password;
-            console.log(email, password)
-            this.$store
-              .dispatch("login", { email, password })
-              .then(() => this.$router.push("/"))
-              .catch(err => console.log(err));
-            },
+        // login: function() {
+        //     let email = this.email;
+        //     let password = this.password;
+        //     console.log(email, password)
+        //     this.$store
+        //       .dispatch("login", { email, password })
+        //       .then(() => this.$router.push("/"))
+        //       .catch(err => console.log(err));
+        //     },
             
-        logout: function() {
-          this.$store.dispatch("logout").then(() => {
-            this.$router.push("/user-profile");
-          });
-        },
+        // logout: function() {
+        //   this.$store.dispatch("logout").then(() => {
+        //     this.$router.push("/user-profile");
+        //   });
+        // },
 
         doNothing() {console.log('do nothing')},
 
