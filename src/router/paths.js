@@ -13,6 +13,14 @@ export default [
     }
   },
   {
+    path: '/annual-summaries',
+    name: 'Annual Summaries',
+    view: 'AnnualSummaries',
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
     path: '/user-profile',
     name: 'User Profile',
     view: 'UserProfile'

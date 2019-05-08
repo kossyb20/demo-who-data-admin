@@ -31,7 +31,7 @@
       </v-form>
 
       </v-flex> -->
-      <v-flex
+      <!-- <v-flex
         sm4
         xs12
         md4
@@ -220,16 +220,20 @@
         <material-card color="blue" title="Live Birth Male, >2.5kg">
           <h2>{{ maleMore2_5() }}</h2>
         </material-card>
-      </v-flex>
-      <!-- <v-flex
+      </v-flex> -->
+      <v-flex
         md12
       >
         <material-card
           color="blue"
-          :title="title"
+          :title="setTitle()"
           text=""
         >
-        <v-btn color="blue" @click="csvExport">Download</v-btn>
+        <v-btn color="blue" @click="csvExport">Download</v-btn><v-btn color="blue" @click="refresh">Refresh</v-btn>
+        <h4 hidden> {{getTotalDeliveries()}} {{getNormalDelivery()}} {{getCesareanSection()}} {{getAssistedDelivery()}} {{getLiveBirths()}}
+          {{getStillBirths()}} {{getFreshStillBirths()}} {{getPreterm()}} {{uterotonicReceived()}} {{breastfed()}} {{babiesWeighted()}}  
+          {{femaleLess2_5()}} {{femaleMore2_5()}} {{maleLess2_5()}} {{maleMore2_5()}}</h4>
+        <v-select :items="years" v-model="yearSelected" @input="getYearData()" box label="Year"></v-select>
         <v-data-table
         :headers="headers"
         :items="dhisData"
@@ -264,7 +268,7 @@
   
         </v-data-table>
         </material-card>
-      </v-flex> -->
+      </v-flex>
     </v-layout>
   </v-container>
 </template>
@@ -327,7 +331,7 @@ export default {
         entries: [],
         search: '',
         headers: [
-          {text: 'DHIS - Data Elements', sortable: false},
+          {text: 'Indicators', sortable: false},
           {text: 'January', sortable: false},
           {text: 'February', sortable: false},
           {text: 'March', sortable: false},
@@ -344,11 +348,13 @@ export default {
      
 
         ],
+        years: [2019, 2020, 2021, 2022, 2023, 2024, 2025],
+        yearSelected: 2019,
         date: new Date().toISOString().substr(0, 10),
         fromDate: new Date().toISOString().substr(0, 10),
         toDate: new Date().toISOString().substr(0, 10),
         menu: false,
-        title: 'DHIS Data Elements ' + new Date().getFullYear(),
+       
         dhisData: [
           { element: 'X-Deliveries - Total', jan: '6', feb: '4', mar: '6', apr: '7', may: '2', jun: '9', jul: '1', aug: '8', sep: '5', oct: '10', nov: '11', dec: '12'},
           { element: 'Deliveries - Normal', jan: '6', feb: '4', mar: '6', apr: '7', may: '2', jun: '9', jul: '1', aug: '8', sep: '5', oct: '10', nov: '11', dec: '12'},
@@ -394,7 +400,7 @@ export default {
             if (key === 'dateOfBirth'){
               let value = entry[key]
               let year = new Date(value).getFullYear()
-              if (year ===  new Date().getFullYear()){
+              if (year ===  this.yearSelected){
                 switch (new Date(value).getUTCMonth()){
                   case 0:
                     janCount += 1
@@ -473,7 +479,7 @@ export default {
               if (value !== 'Cesarean Section' && value !== 'Assisted delivery (forceps or vent use)'){
                 vals.push(value)
                 let year = new Date(entry['dateOfBirth']).getFullYear()
-                if (year === new Date().getFullYear()){
+                if (year === this.yearSelected){
                   
                   
                   switch (new Date(entry['dateOfBirth']).getUTCMonth()){
@@ -557,7 +563,7 @@ export default {
               if (value === 'Cesarean Section'){
                 vals.push(value)
                 let year = new Date(entry['dateOfBirth']).getFullYear()
-                if (year === new Date().getFullYear()){
+                if (year === this.yearSelected){
                   
                   
                   switch (new Date(entry['dateOfBirth']).getUTCMonth()){
@@ -641,7 +647,7 @@ export default {
               if (value === 'Assisted delivery (forceps or vent use)'){
                 vals.push(value)
                 let year = new Date(entry['dateOfBirth']).getFullYear()
-                if (year === new Date().getFullYear()){
+                if (year === this.yearSelected){
                   
                   
                   switch (new Date(entry['dateOfBirth']).getUTCMonth()){
@@ -724,7 +730,7 @@ export default {
               if (value === true){
                 vals.push(value)
                 let year = new Date(entry['dateOfBirth']).getFullYear()
-                if (year === new Date().getFullYear()){
+                if (year === this.yearSelected){
                   
                   
                   switch (new Date(entry['dateOfBirth']).getUTCMonth()){
@@ -807,7 +813,7 @@ export default {
               if (value === false){
                 vals.push(value)
                 let year = new Date(entry['dateOfBirth']).getFullYear()
-                if (year === new Date().getFullYear()){
+                if (year === this.yearSelected){
                   
                   
                   switch (new Date(entry['dateOfBirth']).getUTCMonth()){
@@ -891,7 +897,7 @@ export default {
                 if (entry['babyTimeOfDeath'] !== 'before labour'){
                   vals.push(entry['babyTimeOfDeath'])
                   let year = new Date(entry['dateOfBirth']).getFullYear()
-                  if (year === new Date().getFullYear()){
+                  if (year === this.yearSelected){
                     
                     
                     switch (new Date(entry['dateOfBirth']).getUTCMonth()){
@@ -975,7 +981,7 @@ export default {
               if (value === true){
                 vals.push(value)
                 let year = new Date(entry['dateOfBirth']).getFullYear()
-                if (year === new Date().getFullYear()){
+                if (year === this.yearSelected){
                   
                   
                   switch (new Date(entry['dateOfBirth']).getUTCMonth()){
@@ -1058,7 +1064,7 @@ export default {
               if (value === true){
                 vals.push(value)
                 let year = new Date(entry['dateOfBirth']).getFullYear()
-                if (year === new Date().getFullYear()){
+                if (year === this.yearSelected){
                   
                   
                   switch (new Date(entry['dateOfBirth']).getUTCMonth()){
@@ -1140,7 +1146,7 @@ export default {
               if (value === true){
                 vals.push(value)
                 let year = new Date(entry['dateOfBirth']).getFullYear()
-                if (year === new Date().getFullYear()){
+                if (year === this.yearSelected){
                   
                   
                   switch (new Date(entry['dateOfBirth']).getUTCMonth()){
@@ -1222,7 +1228,7 @@ export default {
               if (value !== ''){
                 vals.push(value)
                 let year = new Date(entry['dateOfBirth']).getFullYear()
-                if (year === new Date().getFullYear()){
+                if (year === this.yearSelected){
                   
                   
                   switch (new Date(entry['dateOfBirth']).getUTCMonth()){
@@ -1304,7 +1310,7 @@ export default {
               if (value !== 0){
                 vals.push(value)
                 let year = new Date(entry['dateOfBirth']).getFullYear()
-                if (year === new Date().getFullYear()){
+                if (year === this.yearSelected){
                   
                   
                   switch (new Date(entry['dateOfBirth']).getUTCMonth()){
@@ -1390,7 +1396,7 @@ export default {
                 if (weight <= 2.5){
                   vals.push(weight)
                   let year = new Date(entry['dateOfBirth']).getFullYear()
-                  if (year === new Date().getFullYear()){
+                  if (year === this.yearSelected){
                     
                     
                     switch (new Date(entry['dateOfBirth']).getUTCMonth()){
@@ -1476,7 +1482,7 @@ export default {
                 if (weight > 2.5){
                   vals.push(weight)
                   let year = new Date(entry['dateOfBirth']).getFullYear()
-                  if (year === new Date().getFullYear()){
+                  if (year === this.yearSelected){
                     
                     
                     switch (new Date(entry['dateOfBirth']).getUTCMonth()){
@@ -1562,7 +1568,7 @@ export default {
                 if (weight <= 2.5){
                   vals.push(weight)
                   let year = new Date(entry['dateOfBirth']).getFullYear()
-                  if (year === new Date().getFullYear()){
+                  if (year === this.yearSelected){
                     
                     
                     switch (new Date(entry['dateOfBirth']).getUTCMonth()){
@@ -1649,7 +1655,7 @@ export default {
                 if (weight > 2.5){
                   vals.push(weight)
                   let year = new Date(entry['dateOfBirth']).getFullYear()
-                  if (year === new Date().getFullYear()){
+                  if (year === this.yearSelected){
                     
                     
                     switch (new Date(entry['dateOfBirth']).getUTCMonth()){
@@ -1732,9 +1738,16 @@ export default {
       },
       refresh(){
         this.getAllData()
-        this.fromDate = new Date().toISOString().substr(0, 10)
-        this.toDate = new Date().toISOString().substr(0, 10)
+     
 
+      },
+      setTitle(){
+        return "Indicators for :    " + this.yearSelected
+      },
+      getYearData(){
+        // axios.get(this.urls.getYearFilteredEntries+'/?year='+this.yearSelected)
+        // .then(res => this.entries = res.data.entries)
+        // .catch(err => this.$alertify.error('FAILED: ' + err));
       }
 
     },
@@ -1749,6 +1762,11 @@ export default {
       
       
     },
+
+    mounted(){
+      this.getTotalDeliveries()
+
+    }
     
 
   }

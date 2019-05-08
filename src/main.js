@@ -54,6 +54,7 @@ Vue.mixin({
         getCenterEntries: process.env.VUE_APP_BASE_URL + '/api/get-center-entries',
         getDateFilteredEntries: process.env.VUE_APP_BASE_URL + '/api/get-entries-by-date',
         getDateRangeFilteredEntries: process.env.VUE_APP_BASE_URL + '/api/get-entries-by-daterange',
+        getYearFilteredEntries: process.env.VUE_APP_BASE_URL + '/api/get-entries-by-year',
         
       }
     }

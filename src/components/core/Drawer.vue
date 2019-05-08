@@ -80,6 +80,11 @@ export default {
         text: 'Dashboard'
       },
       {
+        to: '/annual-summaries',
+        icon: 'mdi-calendar',
+        text: 'Annual Summaries'
+      },
+      {
         to: '/user-profile',
         icon: 'mdi-account',
         text: 'User Profile'
