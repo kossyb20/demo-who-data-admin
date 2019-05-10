@@ -21,9 +21,17 @@ export default [
     }
   },
   {
-    path: '/user-profile',
-    name: 'User Profile',
-    view: 'UserProfile'
+    path: '/user-manager',
+    name: 'User Manager',
+    view: 'UserManager'
+  },
+  {
+    path: '/center-manager',
+    name: 'Center Manager',
+    view: 'CenterManager',
+    meta: {
+      requiresAuth: true
+    }
   },
   {
     path: '/create-center',
@@ -45,6 +53,14 @@ export default [
     path: '/login',
     name: 'Login',
     view: 'Login',
+    meta: {
+      requiresAuth: true
+    }
+  },
+  {
+    path: '/create-user',
+    name: 'Create User',
+    view: 'CreateUser',
     meta: {
       requiresAuth: true
     }

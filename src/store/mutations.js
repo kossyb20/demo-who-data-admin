@@ -16,4 +16,7 @@ export default {
     state.status = ''
     state.token = ''
   },
+  siteUser(state, siteUser){
+    state.siteUser = siteUser
+  }
 }

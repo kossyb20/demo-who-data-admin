@@ -55,6 +55,10 @@ Vue.mixin({
         getDateFilteredEntries: process.env.VUE_APP_BASE_URL + '/api/get-entries-by-date',
         getDateRangeFilteredEntries: process.env.VUE_APP_BASE_URL + '/api/get-entries-by-daterange',
         getYearFilteredEntries: process.env.VUE_APP_BASE_URL + '/api/get-entries-by-year',
+        getAllUsers: process.env.VUE_APP_BASE_URL + '/users/get-users',
+        getAllAdmins: process.env.VUE_APP_BASE_URL + '/users/get-admins',
+        editUser: process.env.VUE_APP_BASE_URL + '/users/edit-user',
+        editAdmin: process.env.VUE_APP_BASE_URL + '/users/edit-admin',
         
       }
     }

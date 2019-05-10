@@ -3,5 +3,6 @@
 export default {
   status: '',
   token: localStorage.getItem('token') || '',
-  admin: {}
+  admin: {},
+  siteUser: {}
 }

@@ -27,7 +27,7 @@
                 <v-text-field v-model="formData.city" label="City"  ></v-text-field>
                 </template>
                 <v-text-field v-model="formData.country" label="Country"  ></v-text-field>
-                <v-text-field v-model="formData.type" label="Type"  ></v-text-field>
+                <v-select v-model="formData.type" :items="types" box label="Type"  ></v-select>
                 <v-btn @click="submitData" color="blue">Create</v-btn>
 
             </v-form>
@@ -84,6 +84,7 @@ export default {
     name: 'Form',
     data() {
         return {formData : initialState(),
+                types: ['PHC', 'General Hospital'],
                 states: [
                         "Abia",
                         "Adamawa",

@@ -20,17 +20,17 @@
       </v-form>
 
       </v-flex> -->
-      <!-- <v-flex
+      <v-flex
         sm12
         xs12
         md12
         lg12
       >
       <v-form>
-         <v-btn @click="refresh" color="blue" block>Refresh</v-btn>
+         <v-btn @click="allTime" color="blue" block>All Time</v-btn>
       </v-form>
 
-      </v-flex> -->
+      </v-flex>
       <v-flex
         sm4
         xs12
@@ -87,7 +87,7 @@
         md6
         lg3
       >
-        <material-card color="blue" title="Deliveries - Caesarian section">
+        <material-card color="blue" title="Deliveries - C- section">
           <h2>{{ getCesareanSection() }}</h2>
         </material-card>
       </v-flex>
@@ -147,7 +147,7 @@
         md6
         lg3
       >
-        <material-card color="blue" title="Newborn placed on KMC">
+        <material-card color="blue" title="Newborns who had Skin to Skin">
           <h2>{{ getKMC() }}</h2>
         </material-card>
       </v-flex>
@@ -345,7 +345,8 @@ export default {
 
         ],
         date: new Date().toISOString().substr(0, 10),
-        fromDate: new Date().toISOString().substr(0, 10),
+        //fromDate: new Date().toISOString().substr(0, 10),
+        fromDate: new Date(new Date().getFullYear(), new Date().getMonth(), 2).toISOString().substr(0, 10),
         toDate: new Date().toISOString().substr(0, 10),
         menu: false,
         title: 'DHIS Data Elements ' + new Date().getFullYear(),
@@ -375,6 +376,7 @@ export default {
           .then(res => this.entries = res.data.entries)
           .catch(err => this.$alertify.error('FAILED: ' + err));
       },
+      
       getTotalDeliveries(){
         
         let janCount = 0
@@ -1730,10 +1732,8 @@ export default {
           var html = document.querySelector("table").outerHTML;
           export_table_to_csv(html, "DHIS Data Elements.csv");
       },
-      refresh(){
+      allTime(){
         this.getAllData()
-        this.fromDate = new Date().toISOString().substr(0, 10)
-        this.toDate = new Date().toISOString().substr(0, 10)
 
       }
 
@@ -1743,7 +1743,7 @@ export default {
       console.log(process.env.NODE_ENV)
       console.log(process.env.VUE_APP_BASE_URL)
 
-      this.getAllData()
+      this.setDateRange()
 
 
       

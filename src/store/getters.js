@@ -5,5 +5,6 @@ export default {
   authStatus: state => state.status,
   getUser: state => {
       return state.admin;
-  }
+  },
+  retSiteUser: state => state.siteUser
 }

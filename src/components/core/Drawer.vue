@@ -85,14 +85,14 @@ export default {
         text: 'Annual Summaries'
       },
       {
-        to: '/user-profile',
+        to: '/user-manager',
         icon: 'mdi-account',
-        text: 'User Profile'
+        text: 'User Manager'
       },
       {
-        to: '/create-center',
+        to: '/center-manager',
         icon: 'mdi-hospital',
-        text: 'Create Center'
+        text: 'Center Manager'
       },
       {
         to: '/entries',

@@ -40,5 +40,11 @@ export default {
       delete axios.defaults.headers.common['Authorization']
       resolve()
     })
+  },
+  getSiteUser({ commit }, siteUser){
+    return new Promise((resolve, reject) =>{
+      commit('siteUser', siteUser)
+      resolve()
+    })
   }
 }
